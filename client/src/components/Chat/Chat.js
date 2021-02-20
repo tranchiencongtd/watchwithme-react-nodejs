@@ -1,28 +1,62 @@
 import React, { Component } from "react";
-
+import axios from 'axios';
+import SearchResult from './SearchResult';
 import "./Chat.css";
 
+// const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
+
+const API = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
 export class Chat extends Component {
   constructor(props) {
     super(props);
+
+    // this.updateInputValue = this.updateInputValue.bind(this);
     this.state = {
-      idYoutube: "",
+      idYoutube: "P8C7-cC0zKw",
       inputValue: "",
+      isLoaded: false,
+      listResults: []
     };
   }
 
+  async getResults() {
+    try {
+      const results = await axios.get('https://youtube.googleapis.com/youtube/v3/search',{
+        params: {
+          part: 'snippet',
+          maxResults: 10,
+          q: this.state.inputValue,
+          key: API
+        }
+      });
+      this.setState({
+        isLoaded: true,
+        listResults: results.data.items
+      });
+    } catch(err) {
+      console.log('Failed to fetch data');
+      this.setState({
+        isLoaded: false
+      });
+    }
+}
+
   changeVideo = () => {
     let video_id = this.state.inputValue.split("v=")[1];
-    let ampersandPosition = video_id.indexOf("&");
+    
+    if(video_id) {
+      let ampersandPosition = video_id.indexOf("&");
 
-    if (ampersandPosition != -1) {
-      video_id = video_id.substring(0, ampersandPosition);
+      if (ampersandPosition != -1) {
+        video_id = video_id.substring(0, ampersandPosition);
+      }
+
+      this.setState({
+        idYoutube: video_id
+      });
+    } else {
+      this.getResults();
     }
-
-    this.setState({
-      idYoutube: video_id,
-      inputValue: "",
-    });
   };
 
   _handleKeyDown = (e) => {
@@ -31,14 +65,24 @@ export class Chat extends Component {
     }
   };
 
+  getId = (e) => {
+      e.preventDefault();
+      let getId = e.target.closest('.list-group-item').getAttribute('data-id');
+      this.setState({
+        idYoutube: getId,
+        listResults: []
+      });
+  }
+
   onClick = () => {
     this.changeVideo();
-  };
+  }
 
-  updateInputValue(evt) {
+  updateInputValue(e) {
     this.setState({
-      inputValue: evt.target.value,
+      inputValue: e.target.value
     });
+  
   }
 
   render() {
@@ -56,7 +100,7 @@ export class Chat extends Component {
                 type="text"
                 onKeyDown={this._handleKeyDown}
                 value={this.state.inputValue}
-                onChange={(evt) => this.updateInputValue(evt)}
+                onChange={(e) => this.updateInputValue(e)}
                 spellCheck = "false"
                 placeholder ="Tìm kiếm hoặc dán link youtube vào đây"
               />
@@ -64,6 +108,11 @@ export class Chat extends Component {
                 className="fas fa-search fix-search"
                 onClick={this.onClick}
               ></i>
+              <SearchResult 
+              action = {this.getId} 
+              isLoaded={this.state.isLoaded}
+              listResults={this.state.listResults}
+              />
             </div>
           </div>
         </div>
@@ -88,7 +137,7 @@ export class Chat extends Component {
                     <div className="dots"></div>
                   </div>
                 </div>
-                <div className="middle" id="style-3">
+                <div className="middle style-3">
                   <div className="voldemort">
                     <div className="incoming">
                       <div className="bubble">

@@ -1,0 +1,39 @@
+.search-results {
+  position:absolute;
+  z-index: 2;
+  width: 100%;
+  box-shadow: 3px 3px 5px rgba(119, 119, 119, 0.5);
+  max-height: 42vh;
+  overflow: auto;
+}
+
+.search-results img {
+  width: 150px;
+  height: 80px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.search-results a {
+  background: #f9fbff;
+  transition: background 0.3s ease;
+  text-align: left;
+  color: #555555;
+  /* padding: 20px; */
+  cursor: pointer;
+}
+
+.search-results a:hover {
+  background: #f6f6f6;
+}
+.search-results h5 {
+  display: inline-block;
+  margin-left: 20px;
+  font-family: Lato;
+  font-size: 18px;
+}
+
+
+
+
+
