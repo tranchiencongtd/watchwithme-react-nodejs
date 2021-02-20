@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import axios from 'axios';
+
 import SearchResult from './SearchResult';
+import Footer from './Footer';
+
 import "./Chat.css";
 
 // const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
-
 const API = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
+
+// const API = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8';
 export class Chat extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +66,9 @@ export class Chat extends Component {
   _handleKeyDown = (e) => {
     if (e.key === "Enter" || e.which === 13) {
       this.changeVideo();
+      this.setState({
+        inputValue : '',
+      });
     }
   };
 
@@ -76,6 +83,9 @@ export class Chat extends Component {
 
   onClick = () => {
     this.changeVideo();
+    this.setState({
+      inputValue : '',
+    });
   }
 
   updateInputValue(e) {
@@ -88,7 +98,7 @@ export class Chat extends Component {
   render() {
     let id = this.state.idYoutube;
     return (
-      <div className="container fix">
+      <div className="container-fluid fix" onClick={() => this.setState({listResults: []})}>
         <div className="row">
           <div className="col-md-8 p-0">
             <div className="search__container">
@@ -108,11 +118,12 @@ export class Chat extends Component {
                 className="fas fa-search fix-search"
                 onClick={this.onClick}
               ></i>
-              <SearchResult 
+              {this.state.isLoaded ? <SearchResult 
               action = {this.getId} 
               isLoaded={this.state.isLoaded}
               listResults={this.state.listResults}
-              />
+              /> : null}
+              
             </div>
           </div>
         </div>
@@ -207,6 +218,9 @@ export class Chat extends Component {
             </div>
           </div>
         </div> */}
+
+        {/* Footer here */}
+        <Footer />
       </div>
     );
   }

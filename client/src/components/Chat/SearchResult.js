@@ -48,7 +48,6 @@ export class SearchResult extends Component {
   }
 
   render() {
-    if(this.props.isLoaded) {
       return (
         <div>
           <div className="list-group search-results style-3">
@@ -56,14 +55,6 @@ export class SearchResult extends Component {
           </div>
         </div>
       );
-    } 
-
-    return (
-      <div>
-        <div className="list-group search-results style-3">
-        </div>
-      </div>
-    );
   }
 }
 

@@ -1,0 +1,32 @@
+h6 {
+  text-transform: uppercase;
+  text-align: center;
+  position: fixed;
+  bottom: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 100%;
+}
+
+.icons {
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  bottom: 4vh;
+  height: 10vh;
+}
+
+.icons i {
+  cursor: pointer;
+  font-size: 35px;
+  transition: transform .2s linear;
+}
+
+.icons i:hover {
+  transform: scale(1.1);
+}
+
+.icons i + i {
+  margin-left: 1%;
+}
