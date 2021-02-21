@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-import SearchResult from './SearchResult';
-import Footer from './Footer';
+import SearchResult from './SearchResult/SearchResult';
+import Footer from './Footer/Footer';
+import MainChat from './ChatBox/MainChat/MainChat';
 
 import "./Chat.css";
 
-// const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
-const API = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
+const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
+const API_1 = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
 
-// const API = 'AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8';
-export class Chat extends Component {
+class Chat extends Component {
   constructor(props) {
     super(props);
 
@@ -23,6 +23,11 @@ export class Chat extends Component {
     };
   }
 
+  componentDidMount () {
+    var boxChat = document.querySelector('.middle')
+    boxChat.scrollTop = boxChat.scrollHeight;
+  }
+
   async getResults() {
     try {
       const results = await axios.get('https://youtube.googleapis.com/youtube/v3/search',{
@@ -30,7 +35,7 @@ export class Chat extends Component {
           part: 'snippet',
           maxResults: 10,
           q: this.state.inputValue,
-          key: API
+          key: API || API_1
         }
       });
       this.setState({
@@ -96,7 +101,7 @@ export class Chat extends Component {
   }
 
   render() {
-    let id = this.state.idYoutube;
+    
     return (
       <div className="container-fluid fix" onClick={() => this.setState({listResults: []})}>
         <div className="row">
@@ -130,83 +135,17 @@ export class Chat extends Component {
 
         <div className="row setup">
           <div className="col-md-8 p-0 video">
-            <iframe
+            <iframe 
+              className="fix-control"
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${this.state.idYoutube}`}
+              src={`https://www.youtube.com/embed/${this.state.idYoutube}?controls=1`}
+              frameborder="0"
+              allowfullscreen
+              title="youtube"
             ></iframe>
           </div>
-          <div className="col-md-4 d-none d-md-block">
-            <div className="container-chat">
-              <div className="chatbox">
-                <div className="top-bar">
-                  <div className="avatar">
-                    <p>V</p>
-                  </div>
-                  <div className="name">Voldemort</div>
-                  <div className="menu">
-                    <div className="dots"></div>
-                  </div>
-                </div>
-                <div className="middle style-3">
-                  <div className="voldemort">
-                    <div className="incoming">
-                      <div className="bubble">
-                        What are you getting.. Oh, oops sorry dude.
-                      </div>
-                    </div>
-                    <div className="outcoming">
-                      <div className="bubble">
-                        Well you should get your Dad a cologne. Here smell it.
-                      </div>
-                    </div>
-                    <div className="outcoming">
-                      <div className="bubble">Well</div>
-                    </div>
-                    <div className="incoming">
-                      <div className="bubble">
-                        What are you getting.. Oh, oops sorry dude.
-                      </div>
-                    </div>
-                    <div className="incoming">
-                      <div className="bubble">What</div>
-                    </div>
-                    <div className="incoming">
-                      <div className="bubble">What</div>
-                    </div>
-                    <div className="incoming">
-                      <div className="bubble">What</div>
-                    </div>
-                    <div className="outcoming">
-                      <div className="bubble">Well</div>
-                    </div>
-                    <div className="outcoming">
-                      <div className="bubble">lorem</div>
-                    </div>
-                    <div className="outcoming">
-                      <div className="bubble">Well</div>
-                    </div>
-
-                    <div className="typing">
-                      <div className="bubble">
-                        <div className="ellipsis one"></div>
-                        <div className="ellipsis two"></div>
-                        <div className="ellipsis three"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="bottom-bar">
-                  <div className="chat">
-                    <input type="text" placeholder="Type a message..." />
-                    <button type="submit">
-                      <i className="fas fa-paper-plane"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MainChat />
         </div>
         {/* 
         <div className="row list-video">
