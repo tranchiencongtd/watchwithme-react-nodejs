@@ -51,7 +51,7 @@ export class Chat extends Component {
     if(video_id) {
       let ampersandPosition = video_id.indexOf("&");
 
-      if (ampersandPosition != -1) {
+      if (ampersandPosition !== -1) {
         video_id = video_id.substring(0, ampersandPosition);
       }
 

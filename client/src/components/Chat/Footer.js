@@ -7,9 +7,9 @@ export class Footer extends Component {
       <>
       <div className="row">
         <div className="col-12 d-flex justify-content-center align-items-center align-md-end icons">
-          <i className="fab fa-facebook" href="https://www.facebook.com/congngusi" target="_blank"></i>
-          <i className="fab fa-github"></i>
-          <i className="fab fa-instagram"></i>
+          <a href="https://www.facebook.com/congngusi" target="_blank" rel="noreferrer"><i className="fab fa-facebook"></i></a>
+          <a href="https://github.com/tranchiencongtd" target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/hiimtcc" target="_blank" rel="noreferrer"><i className="fab fa-instagram"></i></a>
         </div>
       </div>
 

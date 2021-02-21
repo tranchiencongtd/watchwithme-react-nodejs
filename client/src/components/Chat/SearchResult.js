@@ -5,14 +5,9 @@ import "./SearchResults.css";
 export class SearchResult extends Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   isLoaded: false,
-    //   listResults: []
-    // };
   }
 
-
+  
 
   // async getResults() {
   //     try {
@@ -39,10 +34,10 @@ export class SearchResult extends Component {
 
   showResult() {
     let markup = this.props.listResults.map( el => (
-      <a key={el.id.videoId} data-id={el.id.videoId} className="list-group-item" onClick={this.props.action}> 
-      <img className="select d-none d-lg-inline-block" src={el.snippet.thumbnails.default.url} />
+      <li key={el.id.videoId} data-id={el.id.videoId} className="list-group-item" onClick={this.props.action}> 
+      <img className="select d-none d-lg-inline-block" src={el.snippet.thumbnails.default.url} alt={el.snippet.title}/>
       <h5>{el.snippet.title}</h5>
-    </a>
+      </li>
     ));
     return markup;
   }

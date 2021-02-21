@@ -362,7 +362,7 @@ button:hover {
 .fix-search {
   position: absolute;
   right: 5%;
-  top: 20%;
+  top: 25%;
   cursor: pointer !important;
   transition: color .2s linear;
   padding: 5px;

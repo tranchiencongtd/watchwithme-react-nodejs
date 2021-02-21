@@ -14,16 +14,17 @@
   display: inline-block;
 }
 
-.search-results a {
-  background: #f9fbff;
+.search-results li {
+  blickground: #f9fbff;
   transition: background 0.3s ease;
   text-align: left;
   color: #555555;
   /* padding: 20px; */
   cursor: pointer;
+  list-style: none;
 }
 
-.search-results a:hover {
+.search-results li:hover {
   background: #f6f6f6;
 }
 .search-results h5 {
