@@ -30,7 +30,7 @@ p {
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
+	margin: 10px 0;
 }
 
 span {
@@ -55,11 +55,14 @@ button {
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
-	padding: 12px 45px;
+	padding: 12px 20px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	transition: transform .2s ease-in;
+	transition: all .3s ease-in;
+	right: 0;
 }
+
+
 
 button:active {
 	transform: scale(0.95);
@@ -70,12 +73,20 @@ button:focus {
 }
 
 button:hover {
-  color: #fff;
+  background-color: #fff !important;
+	transform: none;
+	color: #212529;
+	border: 1px solid #f6f6f6 !important;
 }
 
 button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
+	width: 50%;
+}
+
+button.ghost + button {
+	margin-top: 20px;
 }
 
 form {
@@ -155,10 +166,6 @@ form {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
-}
-
 .overlay {
 	background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
@@ -202,8 +209,6 @@ form {
 
 .social-container {
 	margin: 20px 0;
-
-
 }
 
 .social-container .btn-sign {
@@ -227,7 +232,7 @@ form {
 }
 
 .btn-git {
-  background: #333;
+  background: #212529;
 }
 
 

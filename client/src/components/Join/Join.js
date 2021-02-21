@@ -65,8 +65,14 @@ class Chat extends Component {
           <div class="overlay-container">
             <div class="overlay">
               <div class="overlay-panel overlay-right">
-                <h1>WELCOME</h1>
-                <p>Join to watch and chat with your friends.</p>
+                <h1>Hi, Công</h1>
+                <p>Go to watch and chat with your friends.</p>
+                <button class="ghost" id="signUp">Create Room
+                <i class="fas fa-plus"></i>
+                </button>
+                <button class="ghost" >Join Room
+                <i class="fas fa-sign-in-alt"></i>
+                </button>
               </div>
             </div>
           </div>
