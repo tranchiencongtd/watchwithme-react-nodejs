@@ -11,31 +11,31 @@ class Chat extends Component {
 
   render() {
     return (
-      <div class="join-page">
-        <div class="container" id="container">
-          <div class="form-container sign-in-container">
+      <div className="join-page">
+        <div className="container" id="container">
+          <div className="form-container sign-in-container">
             <form action="#">
               <h1>Sign in with</h1>
-              <div class="social-container">
+              <div className="social-container">
                   <GoogleLogin
                     clientId="173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com"
                     render={renderProps => (
                       <button className="btn-sign btn-g" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                        <i class="fab fa-google-plus-g"></i>
+                        <i className="fab fa-google-plus-g"></i>
                       </button>
                     )}
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                     cookiePolicy={"single_host_origin"}
                     isSignedIn={true}
-                    class="social"
+                    className="social"
                   />
               
-                <GoogleLogin
-                    clientId="173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com"
+                {/* <GoogleLogin
+                    clientId="#"
                     render={renderProps => (
                       <button className="btn-sign btn-f" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                        <i class="fab fa-facebook-f"></i>
+                        <i className="fab fa-facebook-f"></i>
                       </button>
                     )}
                     onSuccess={this.responseGoogle}
@@ -46,32 +46,36 @@ class Chat extends Component {
                   />
                   
                 <GoogleLogin
-                    clientId="173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com"
+                    clientId="#"
                     render={renderProps => (
                       <button className="btn-sign btn-git" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                        <i class="fab fa-github"></i>
+                        <i className="fab fa-github"></i>
                       </button>
                     )}
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                     cookiePolicy={"single_host_origin"}
                     isSignedIn={true}
-                    class="social"
-                  />
+                    className="social"
+                  /> */}
               </div>
               <span>Let's start right now!</span>
             </form>
           </div>
-          <div class="overlay-container">
-            <div class="overlay">
-              <div class="overlay-panel overlay-right">
+          <div className="overlay-container">
+            <div className="overlay">
+              <div className="overlay-panel overlay-right">
                 <h1>Hi, Công</h1>
                 <p>Go to watch and chat with your friends.</p>
-                <button class="ghost" id="signUp">Create Room
-                <i class="fas fa-plus"></i>
+                <button 
+                className="ghost"
+                id="signUp"
+                onClick={() => {window.open('http://localhost:3000/chat', '_self');}}
+                >Create Room
+                <i className="fas fa-plus"></i>
                 </button>
-                <button class="ghost" >Join Room
-                <i class="fas fa-sign-in-alt"></i>
+                <button className="ghost" >Join Room
+                <i className="fas fa-sign-in-alt"></i>
                 </button>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
+
 import SearchResult from './SearchResult/SearchResult';
 import Footer from './Footer/Footer';
 import MainChat from './ChatBox/MainChat/MainChat';
@@ -9,6 +10,8 @@ import "./Chat.css";
 
 const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
 const API_1 = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
+
+
 
 class Chat extends Component {
   constructor(props) {
@@ -24,7 +27,7 @@ class Chat extends Component {
   }
 
   componentDidMount () {
-    var boxChat = document.querySelector('.middle')
+    let boxChat = document.querySelector('.middle')
     boxChat.scrollTop = boxChat.scrollHeight;
   }
 
@@ -101,7 +104,6 @@ class Chat extends Component {
   }
 
   render() {
-    
     return (
       <div className="container-fluid fix" onClick={() => this.setState({listResults: []})}>
         <div className="row">
@@ -140,8 +142,8 @@ class Chat extends Component {
               width="100%"
               height="100%"
               src={`https://www.youtube.com/embed/${this.state.idYoutube}?controls=1`}
-              frameborder="0"
-              allowfullscreen
+              frameBorder="0"
+              allowFullScreen
               title="youtube"
             ></iframe>
           </div>
