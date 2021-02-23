@@ -5,6 +5,22 @@
 	box-sizing: border-box;
 }
 
+button {
+	position: initial;
+}
+.info-login {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 100%;
+	text-align: left;
+	padding: 10px 10px;
+}
+
+.info-login h5 {
+	font-size: 18px;
+}
+
 .join-page {
 	background: #f6f5f7;
 	display: flex;
@@ -60,6 +76,12 @@
 	text-transform: uppercase;
 	transition: all .3s ease-in;
 	right: 0;
+}
+
+.join-page .overlay a {
+	display: inline-block;
+	width: 60%;
+	padding: 10px;
 }
 
 .join-page button:focus {
@@ -238,6 +260,76 @@ button.ghost + button {
   background: #212529;
 }
 
+.btn-out {
+	color: black !important;
+	padding: 5px;
+	height: 50px;
+	width: 100%;
+	border: none !important;
+	line-height: 50px;
+	padding-left: 20px !important;
+}
 
+.btn-out:hover {
+	transform: translateY(-10px) !important;
+}
 
+.btn-out:hover i {
+	animation-name: bye;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+}
 
+@keyframes bye {
+	from {transform: rotate(-50deg);}
+  to {transform: rotate(50deg);}
+}
+
+.btn-out i {
+	font-size: 20px;
+	margin-left: 10px;
+}
+
+/* Modal */
+.modal-title {
+	text-align: center;
+	width: 100%;
+	padding-left: 9%;
+	color: rgba(202, 116, 116, 0.884);
+}
+.modal-content {
+	background: #f6f6f6;
+	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	
+}
+
+.modal-header {
+	border-bottom: none;
+	
+}
+
+.modal-body {
+	padding-top: 0;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.modal-footer {
+	border-top: none;
+}
+
+.input-modal {
+	background: none;
+	border: 1px solid rgba(202, 116, 116, 0.884);
+	width: 50%;
+	padding: 6px 50px;
+	border-radius: 50px;
+}
+button.close,
+button.join-modal,
+button.close-modal {
+	color:rgba(202, 116, 116, 1) !important;
+}

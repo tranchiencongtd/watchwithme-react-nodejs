@@ -134,7 +134,6 @@ class Chat extends Component {
             </div>
           </div>
         </div>
-
         <div className="row setup">
           <div className="col-md-8 p-0 video">
             <iframe 
@@ -149,18 +148,6 @@ class Chat extends Component {
           </div>
           <MainChat />
         </div>
-        {/* 
-        <div className="row list-video">
-          <div className="col-md-8 p-0 search-list">
-            <div className="card-deck">
-            </div>
-            <div className="card-columns">
-              <div className="card"></div>
-            </div>
-          </div>
-        </div> */}
-
-        {/* Footer here */}
         <Footer />
       </div>
     );

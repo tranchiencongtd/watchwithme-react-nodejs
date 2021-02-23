@@ -16,8 +16,6 @@ class MainChat extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.state.message);
-    
     socket.emit('joinRoom', 'hello');
   }
 

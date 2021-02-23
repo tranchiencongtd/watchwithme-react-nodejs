@@ -12,6 +12,8 @@ const io = socketio(server , {
   }
 });
 
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+
 // Run when client connects
 io.on('connection', (socket) => {
   
