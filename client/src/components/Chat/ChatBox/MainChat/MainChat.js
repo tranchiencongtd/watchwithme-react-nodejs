@@ -4,34 +4,57 @@ import io from "socket.io-client";
 import TopBar from '../TopBar/TopBar';  
 import Input from './InPut';
 import Messages from './Messages';
+import queryString from 'query-string';
+
 
 const ENDPOINT = 'http://localhost:5000';
-const socket = io(ENDPOINT);
+let socket = io(ENDPOINT);
 
 class MainChat extends Component {
+  static socket = socket = io(ENDPOINT);
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      name: '',
+      room: '',
+      message: '',
+      users: [],
+      messages: ['ahihi', 'do ngok'],
     };
   }
   componentDidMount() {
-    socket.emit('joinRoom', 'hello');
+    const { name, room }= queryString.parse(window.location.search);
+
+    this.setState({
+      name,
+      room
+    });
+
+    socket.emit('joinRoom', {name, room} , (err) => {
+      if(err) {
+        alert(err);
+      }
+    });
+
+    socket.on('message', message => {
+      this.setState({
+        messages : [ ...this.state.messages, message]
+      });
+    });
+    
+}
+
+  sendMessage = (e) => {
+    e.preventDefault();
+    if(this.state.message) {
+      socket.emit('sendMessage', this.state.message, () => this.setState({message: ''}));
+    }
   }
 
   setMessage(value) {
-    console.log(value);
     this.setState({
       message: value
     });
-  }
-
-  sendMessage(e) {
-    e.preventDefault();
-
-    if(this.setState.message) {
-      socket.emit('sendMessage', this.setState.message, () => this.setState({message: ''}));
-    }
   }
 
   render() {
@@ -40,8 +63,12 @@ class MainChat extends Component {
         <div className="container-chat">
           <div className="chatbox">
             <TopBar />
-            <Messages />
-            <Input message={this.state.message} setMessage={this.setMessage.bind(this)} sendMessage={this.sendMessage} />
+            <Messages messages={this.state.messages} />
+            {/* name={this.state.name} */}
+            <Input 
+            message={this.state.message} 
+            setMessage={this.setMessage.bind(this)} 
+            sendMessage={this.sendMessage} />
           </div>
         </div>
       </div>

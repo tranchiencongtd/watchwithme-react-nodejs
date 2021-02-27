@@ -96,15 +96,23 @@ button {
 .join-page button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
-	width: 60%;
+	width: 40%;
 }
 
 button.ghost:hover {
 	transform: scale(1.1);
 }
 
-button.ghost + button {
-	margin-top: 20px;
+button.ghost {
+	top: 5px;
+}
+
+a + button.ghost {
+	top: -5px;
+}
+
+.join-page .overlay-right a {
+	width: 100%;
 }
 
 .ghost > i {
@@ -216,7 +224,7 @@ button.ghost + button {
 	flex-direction: column;
 	padding: 0 30px;
 	text-align: center;
-	top: 0;
+	top: 2vh;
 	height: 100%;
 	width: 50%;
 	transform: translateX(0);
@@ -226,6 +234,10 @@ button.ghost + button {
 .overlay-right {
 	right: 0;
 	transform: translateX(0);
+}
+
+.overlay-right h1 {
+	padding: 2.5vh 0;
 }
 
 .container.right-panel-active .overlay-right {
@@ -282,8 +294,8 @@ button.ghost + button {
 }
 
 @keyframes bye {
-	from {transform: rotate(-50deg);}
-  to {transform: rotate(50deg);}
+	from {transform: rotate(-30deg);}
+  to {transform: rotate(30deg);}
 }
 
 .btn-out i {
@@ -333,3 +345,4 @@ button.join-modal,
 button.close-modal {
 	color:rgba(202, 116, 116, 1) !important;
 }
+

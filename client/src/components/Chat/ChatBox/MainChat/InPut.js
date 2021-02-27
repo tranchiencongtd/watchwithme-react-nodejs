@@ -16,7 +16,7 @@ class InPut extends Component {
           value={this.props.message}
           onChange={({ target: { value } }) => this.props.setMessage(value)}
           />
-          <button onClick={e => this.props.sendMessage(e)}>
+          <button onClick={(e) => this.props.sendMessage(e)}>
             <i className="fas fa-paper-plane"></i>
           </button>
         </div>

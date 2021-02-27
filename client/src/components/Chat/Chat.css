@@ -288,7 +288,12 @@ button {
   cursor: pointer;
   outline: 0;
 }
-button:hover {
+
+.fly {
+  position: absolute;
+}
+
+button.fly:hover {
   transform: scale(1.1);
   transition: all 0.3s ease-in-out;
   color: #79c7c5;

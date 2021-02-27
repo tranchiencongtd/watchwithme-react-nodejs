@@ -47,11 +47,12 @@ class Chat extends Component {
 
   logout() {
     this.setState({
-      fullName: "",
-      name: "",
-      room: "",
-      img: "",
-      email: "",
+      fullName: '',
+      familyName: '',
+      givenName: '',
+      room: '',
+      img: '',
+      email: '',
       loginSuccess: false,
     });
 
@@ -70,7 +71,8 @@ class Chat extends Component {
 
     this.setState({
       fullName: googleResponse.fullName,
-      name: googleResponse.familyName,
+      familyNname: googleResponse.familyName,
+      givenName: googleResponse.givenName,
       room: googleResponse.token,
       img: googleResponse.image,
       email: googleResponse.email,
@@ -127,10 +129,10 @@ class Chat extends Component {
                           ? (e.preventDefault(), this.toastUp('Nhập sai mã phòng'))
                           : (null,  this.closeModal())
                       }
-                      to={`/chat?name=${this.state.name}&room=${this.state.roomModal}`}
+                      to={`/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.roomModal}`}
                     >
                 <button className="btn join-modal" data-toggle="modal" data-target="#myModal">
-                  Vào
+                  OK
                 </button>
                 </Link>
               </div>
@@ -224,24 +226,27 @@ class Chat extends Component {
                 <div className="overlay">
                   <div className="overlay-panel overlay-right">
                     {this.state.loginSuccess ? (
-                      <h1>Hi, {this.state.name}</h1>
+                      <h1>Hi, {this.state.givenName ? this.state.givenName: this.state.familyName}</h1>
                     ) : (
                       <h1>WELCOME!</h1>
                     )}
                     <p>Go to watch and chat with your friends.</p>
+                    
                     <Link
                       onClick={(e) =>
-                        !this.state.name || !this.state.room
+                        !(this.state.givenName ? this.state.givenName: this.state.familyName) || !this.state.room
                           ? (e.preventDefault(), this.toastUp('Bạn cần đăng nhập trước'))
                           : null
                       }
-                      to={`/chat?name=${this.state.name}&room=${this.state.room}`}
+                      to={`/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.room}`}
                     >
                       <button className="ghost">
                         Create
                         <i className="fas fa-plus"></i>
                       </button>
                     </Link>
+                    
+                    
                     <button
                       className="ghost"
                       data-toggle="modal"
@@ -250,6 +255,7 @@ class Chat extends Component {
                       Join
                       <i className="fas fa-sign-in-alt"></i>
                     </button>
+                    
                     {/* Modal */}
                   </div>
                 </div>

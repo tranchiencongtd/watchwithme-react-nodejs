@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -11,31 +12,31 @@ const io = socketio(server , {
     origin: '*',
   }
 });
-
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
-
 // Run when client connects
 io.on('connection', (socket) => {
-  
-  socket.on('joinRoom', (hi) => {
-    console.log(hi);
-    // Welcome current user
-    
+  console.log('A user join room');
 
-    // Broadcast when a user connects
-    
-
-    // Send users and room info
-    
+  socket.on('joinRoom', ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+    if(error) return callback(error);
+    socket.join(user.room);
+    callback();
+    console.log(user);
   });
 
-  // Listen for chatMessage
-  
+  socket.on('sendMessage', (message, callback) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('message', message);
+    callback();
+  });
 
-  // Runs when client disconnects
   socket.on('disconnect', () => {
-    console.log('A user left room');
-  });
+    const user = removeUser(socket.id);
+
+    if(user) {
+      console.log("A user left room");
+    }
+  })
 });
 
 
