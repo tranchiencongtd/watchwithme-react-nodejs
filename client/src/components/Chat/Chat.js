@@ -115,7 +115,7 @@ class Chat extends Component {
               <input
                 className="search__input"
                 type="text"
-                onKeyDown={this._handleKeyDown}
+                onKeyDown={(e) =>this._handleKeyDown(e)}
                 value={this.state.inputValue}
                 onChange={(e) => this.updateInputValue(e)}
                 spellCheck = "false"

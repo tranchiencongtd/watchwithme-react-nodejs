@@ -19,7 +19,7 @@ class MainChat extends Component {
       room: '',
       message: '',
       users: [],
-      messages: ['ahihi', 'do ngok'],
+      messages: [{user: 'Tcc',text:'aasddsasdadsadsadasdsadsadsadsad' }],
     };
   }
   componentDidMount() {
@@ -63,12 +63,15 @@ class MainChat extends Component {
         <div className="container-chat">
           <div className="chatbox">
             <TopBar />
-            <Messages messages={this.state.messages} />
-            {/* name={this.state.name} */}
+            <Messages messages={this.state.messages} 
+            name={this.state.name}
+            />
+          
             <Input 
             message={this.state.message} 
             setMessage={this.setMessage.bind(this)} 
-            sendMessage={this.sendMessage} />
+            sendMessage={this.sendMessage}
+            />
           </div>
         </div>
       </div>

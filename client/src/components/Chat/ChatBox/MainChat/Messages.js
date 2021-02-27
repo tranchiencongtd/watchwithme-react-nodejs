@@ -9,11 +9,11 @@ class Messages extends Component {
 
   render() {
     return (
-<div className="middle style-3">
+          <div className="middle style-3">
               <div className="voldemort">
                 
-              {this.props.messages.map((message, i) => <div key={i}><Message message={message} /></div>)}
-              {/* name={this.props.name} */}
+              {this.props.messages.map((message, i) => <div key={i}><Message message={message} name={this.props.name} /></div>)}
+             
 
                 {/* <div className="typing">
                   <div className="bubble">
