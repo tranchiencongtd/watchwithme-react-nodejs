@@ -16,23 +16,23 @@ const io = socketio(server , {
 io.on('connection', (socket) => {
   console.log('A user join room');
 
-  socket.on('joinRoom', ({ name, room, id }, callback) => {
-    const { error, user } = addUser({idUser: socket.id, name, room, id });
+  socket.on('joinRoom', ({ name, room, id, img }, callback) => {
+    const { error, user } = addUser({idUser: socket.id, name, room, id, img });
     if(error) return callback(error);
     socket.join(user.room);
     callback();
-    console.log(user);
   });
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
-    io.to(user.room).emit('message', { user: user.name, text: message, idMess: user.id });
+    if(user) {
+      io.to(user.room).emit('message', { user: user.name, text: message, idMess: user.id, img: user.img });
+    }
     callback();
   });
 
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
-    console.log("A user left room");
     if(user) {
       console.log("A user left room");
     }

@@ -7,7 +7,7 @@ class Message extends Component {
   
   render() {
     let isSentByCurrentUser = false;
-    const { text, user, idMess, img } = this.props.message;
+    const { text, idMess, img } = this.props.message;
 
     
 
@@ -29,7 +29,7 @@ class Message extends Component {
       : (
       <>
       <div className="incoming">
-      <img src={this.props.img} alt="user"/>
+      <img src={img} alt="user"/>
         <div className="bubble">
           {text}
         </div>

@@ -20,7 +20,7 @@ class MainChat extends Component {
       img: '',
       message: '',
       users: [],
-      messages: [{user: 'Tcc',text:'aasddsasdadsadsadasdsadsadsadsad' }],
+      messages: [],
     };
   }
 
@@ -34,7 +34,8 @@ class MainChat extends Component {
       img,
     });
 
-    socket.emit('joinRoom', {name, room, id} , (err) => {
+
+    socket.emit('joinRoom', {name, room, id, img} , (err) => {
       if(err) {
         alert(err);
       }
@@ -69,7 +70,7 @@ class MainChat extends Component {
             <TopBar />
             <Messages messages={this.state.messages} 
             idMess={this.state.idMess}
-            img={this.state.img}
+            
             />
           
             <Input 

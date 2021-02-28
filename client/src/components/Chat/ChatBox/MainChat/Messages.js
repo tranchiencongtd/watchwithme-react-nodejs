@@ -30,7 +30,7 @@ class Messages extends Component {
                 <div key={i}>
                   <Message message={message} 
                   idMess={this.props.idMess} 
-                  img={this.props.img}
+                  
                   />
                 </div>)}
              
