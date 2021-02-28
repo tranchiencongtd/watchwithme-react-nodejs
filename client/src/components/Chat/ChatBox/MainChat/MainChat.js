@@ -20,8 +20,16 @@ class MainChat extends Component {
       users: [],
       messages: [],
     };
-    this.socket = io('http://localhost:5000');
+    this.connectionOptions =  {
+      "force new connection" : true,
+      "reconnectionAttempts": "Infinity", 
+      "timeout" : 10000,                  
+      "transports" : ["websocket"]
+  };
+    this.socket = io.connect('http://localhost:5000',this.connectionOptions);
   }
+
+  
 
   componentDidMount() {
     const { name, room, id, img }= queryString.parse(window.location.search);

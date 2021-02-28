@@ -8,11 +8,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-const io = socketio(server , {
-  cors: {
-    origin: '*',
-  }
-});
+const io = socketio(server);
 // Run when client connects
 io.on('connection', (socket) => {
   socket.on('joinRoom', ({ name, room, id, img }, callback) => {
