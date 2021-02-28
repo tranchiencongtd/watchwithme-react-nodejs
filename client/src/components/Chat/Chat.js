@@ -26,10 +26,10 @@ class Chat extends Component {
     };
   }
 
-  componentDidMount () {
-    let boxChat = document.querySelector('.middle')
-    boxChat.scrollTop = boxChat.scrollHeight;
-  }
+  // componentDidMount () {
+  //   let boxChat = document.querySelector('.middle')
+  //   boxChat.scrollTop = boxChat.scrollHeight;
+  // }
 
   async getResults() {
     try {
@@ -104,6 +104,7 @@ class Chat extends Component {
   }
 
   render() {
+
     return (
       <div className="container-fluid fix" onClick={() => this.setState({listResults: []})}>
         <div className="row">

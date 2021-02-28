@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { customAlphabet } from 'nanoid';
+
+
 import Footer from "../Chat/Footer/Footer";
 
 import "./Join.css";
@@ -17,6 +20,8 @@ import "react-toastify/dist/ReactToastify.css";
 // it is compulsory method.
 toast.configure();
 
+const nanoid = customAlphabet('1234567890abcdef', 10);
+
 const clientId =
   "173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com";
 
@@ -24,6 +29,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user:'',
       roomModal: '',
       fullName: '',
       name: '',
@@ -32,6 +38,7 @@ class Chat extends Component {
       email: '',
       loginSuccess: false,
     };
+    
   }
 
   closeModal() {
@@ -59,6 +66,9 @@ class Chat extends Component {
     console.log("logout success");
   }
 
+  componentDidMount() {
+  }
+
   responseGoogle(response) {
     const googleResponse = {
       fullName: response.profileObj.name,
@@ -73,11 +83,13 @@ class Chat extends Component {
       fullName: googleResponse.fullName,
       familyNname: googleResponse.familyName,
       givenName: googleResponse.givenName,
-      room: googleResponse.token,
+      user: googleResponse.token,
       img: googleResponse.image,
       email: googleResponse.email,
+      room: nanoid(),
       loginSuccess: true,
     });
+
   }
 
   responseGoogleF(response) {
@@ -129,7 +141,7 @@ class Chat extends Component {
                           ? (e.preventDefault(), this.toastUp('Nhập sai mã phòng'))
                           : (null,  this.closeModal())
                       }
-                      to={`/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.roomModal}`}
+                      to={ `/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.roomModal}&img=${this.state.img}&fn=${this.state.fullName}&id=${this.state.user}`}
                     >
                 <button className="btn join-modal" data-toggle="modal" data-target="#myModal">
                   OK
@@ -238,7 +250,7 @@ class Chat extends Component {
                           ? (e.preventDefault(), this.toastUp('Bạn cần đăng nhập trước'))
                           : null
                       }
-                      to={`/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.room}`}
+                      to={ `/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.room}&img=${this.state.img}&fn=${this.state.fullName}&id=${this.state.user}`}
                     >
                       <button className="ghost">
                         Create

@@ -11,26 +11,30 @@ const ENDPOINT = 'http://localhost:5000';
 let socket = io(ENDPOINT);
 
 class MainChat extends Component {
-  static socket = socket = io(ENDPOINT);
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       room: '',
+      idMess: '',
+      img: '',
       message: '',
       users: [],
       messages: [{user: 'Tcc',text:'aasddsasdadsadsadasdsadsadsadsad' }],
     };
   }
-  componentDidMount() {
-    const { name, room }= queryString.parse(window.location.search);
 
+  componentDidMount() {
+    const { name, room, id, img }= queryString.parse(window.location.search);
+    
     this.setState({
       name,
-      room
+      room,
+      idMess: id,
+      img,
     });
 
-    socket.emit('joinRoom', {name, room} , (err) => {
+    socket.emit('joinRoom', {name, room, id} , (err) => {
       if(err) {
         alert(err);
       }
@@ -64,7 +68,8 @@ class MainChat extends Component {
           <div className="chatbox">
             <TopBar />
             <Messages messages={this.state.messages} 
-            name={this.state.name}
+            idMess={this.state.idMess}
+            img={this.state.img}
             />
           
             <Input 
