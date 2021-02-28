@@ -5,9 +5,9 @@ class TopBar extends Component {
     return (
         <div className="top-bar">
                   <div className="avatar">
-                    <p>V</p>
+                    <p style={{marginLeft: '20%'}}>&#128172;</p>
                   </div>
-                  <div className="name">Voldemort</div>
+                  <div className="name">Box chat ;)</div>
                   <div className="menu">
                     <div className="dots"></div>
                   </div>

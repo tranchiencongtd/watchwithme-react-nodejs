@@ -7,8 +7,6 @@ import Messages from './Messages';
 import queryString from 'query-string';
 
 
-const ENDPOINT = 'http://localhost:5000';
-let socket = io(ENDPOINT);
 
 class MainChat extends Component {
   constructor(props) {
@@ -22,6 +20,7 @@ class MainChat extends Component {
       users: [],
       messages: [],
     };
+    this.socket = io('http://localhost:5000');
   }
 
   componentDidMount() {
@@ -35,13 +34,13 @@ class MainChat extends Component {
     });
 
 
-    socket.emit('joinRoom', {name, room, id, img} , (err) => {
+    this.socket.emit('joinRoom', {name, room, id, img} , (err) => {
       if(err) {
         alert(err);
       }
     });
 
-    socket.on('message', message => {
+    this.socket.on('message', message => {
       this.setState({
         messages : [ ...this.state.messages, message]
       });
@@ -52,7 +51,7 @@ class MainChat extends Component {
   sendMessage = (e) => {
     e.preventDefault();
     if(this.state.message) {
-      socket.emit('sendMessage', this.state.message, () => this.setState({message: ''}));
+      this.socket.emit('sendMessage', this.state.message, () => this.setState({message: ''}));
     }
   }
 
