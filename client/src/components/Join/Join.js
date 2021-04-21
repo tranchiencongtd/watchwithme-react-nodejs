@@ -1,20 +1,19 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { customAlphabet } from 'nanoid';
 
+import Footer from '../Chat/Footer/Footer';
 
-import Footer from "../Chat/Footer/Footer";
+import './Join.css';
 
-import "./Join.css";
-
-import GoogleLogin from "react-google-login";
-import { GoogleLogout } from "react-google-login";
+import GoogleLogin from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 
 // Importing toastify module
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 // Import toastify css file
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 // toast-configuration method,
 // it is compulsory method.
@@ -23,13 +22,13 @@ toast.configure();
 const nanoid = customAlphabet('1234567890abcdef', 10);
 
 const clientId =
-  "173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com";
+  '173166829954-4va2pebhlsgqsr8riavk01m8nm9k8r4q.apps.googleusercontent.com';
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:'',
+      user: '',
       roomModal: '',
       fullName: '',
       name: '',
@@ -38,12 +37,11 @@ class Chat extends Component {
       email: '',
       loginSuccess: false,
     };
-    
   }
 
   closeModal() {
-    const modal = document.querySelector('.modal-backdrop')
-    if(modal) {
+    const modal = document.querySelector('.modal-backdrop');
+    if (modal) {
       modal.parentNode.removeChild(modal);
     }
   }
@@ -63,11 +61,10 @@ class Chat extends Component {
       loginSuccess: false,
     });
 
-    console.log("logout success");
+    console.log('logout success');
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   responseGoogle(response) {
     const googleResponse = {
@@ -89,7 +86,6 @@ class Chat extends Component {
       room: nanoid(),
       loginSuccess: true,
     });
-
   }
 
   responseGoogleF(response) {
@@ -125,27 +121,45 @@ class Chat extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <input className="input-modal" type="text" autoFocus onChange={({target: {value}}) => this.setState({roomModal: value})}/>
+                <input
+                  className="input-modal"
+                  type="text"
+                  autoFocus
+                  onChange={({ target: { value } }) =>
+                    this.setState({ roomModal: value })
+                  }
+                />
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn close-modal"
-                  data-dismiss="modal"             
+                  data-dismiss="modal"
                 >
                   Đóng
                 </button>
                 <Link
-                      onClick={(e) =>
-                          !this.state.roomModal
-                          ? (e.preventDefault(), this.toastUp('Nhập sai mã phòng'))
-                          : (null,  this.closeModal())
-                      }
-                      to={ `/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.roomModal}&img=${this.state.img}&fn=${this.state.fullName}&id=${this.state.user}`}
-                    >
-                <button className="btn join-modal" data-toggle="modal" data-target="#myModal">
-                  OK
-                </button>
+                  onClick={(e) =>
+                    !this.state.roomModal
+                      ? (e.preventDefault(),
+                        this.toastUp('Phòng không tồn tại'))
+                      : (null, this.closeModal())
+                  }
+                  to={`/chat?name=${
+                    this.state.givenName
+                      ? this.state.givenName
+                      : this.state.familyName
+                  }&room=${this.state.roomModal}&img=${this.state.img}&fn=${
+                    this.state.fullName
+                  }&id=${this.state.user}`}
+                >
+                  <button
+                    className="btn join-modal"
+                    data-toggle="modal"
+                    data-target="#myModal"
+                  >
+                    OK
+                  </button>
                 </Link>
               </div>
             </div>
@@ -157,10 +171,10 @@ class Chat extends Component {
               <div className="form-container sign-in-container">
                 <form action="#">
                   {this.state.loginSuccess ? (
-                    <div style={{ width: "100%" }}>
+                    <div style={{ width: '100%' }}>
                       <img src={this.state.img} alt="user" />
                       <div>
-                        <h5 style={{ margin: "10px 0px" }}>
+                        <h5 style={{ margin: '10px 0px' }}>
                           {this.state.fullName}
                         </h5>
                       </div>
@@ -196,7 +210,7 @@ class Chat extends Component {
                           onSuccess={this.responseGoogle.bind(this)}
                           onFailure={this.responseGoogleF.bind(this)}
                           isSignedIn={true}
-                          cookiePolicy={"single_host_origin"}
+                          cookiePolicy={'single_host_origin'}
                           className="social"
                         />
 
@@ -238,27 +252,40 @@ class Chat extends Component {
                 <div className="overlay">
                   <div className="overlay-panel overlay-right">
                     {this.state.loginSuccess ? (
-                      <h1>Hi, {this.state.givenName ? this.state.givenName: this.state.familyName}</h1>
+                      <h1>
+                        Hi,{' '}
+                        {this.state.givenName
+                          ? this.state.givenName
+                          : this.state.familyName}
+                      </h1>
                     ) : (
                       <h1>WELCOME!</h1>
                     )}
                     <p>Go to watch and chat with your friends.</p>
-                    
+
                     <Link
                       onClick={(e) =>
-                        !(this.state.givenName ? this.state.givenName: this.state.familyName) || !this.state.room
-                          ? (e.preventDefault(), this.toastUp('Bạn cần đăng nhập trước'))
+                        !(this.state.givenName
+                          ? this.state.givenName
+                          : this.state.familyName) || !this.state.room
+                          ? (e.preventDefault(),
+                            this.toastUp('Bạn cần đăng nhập trước'))
                           : null
                       }
-                      to={ `/chat?name=${this.state.givenName ? this.state.givenName: this.state.familyName}&room=${this.state.room}&img=${this.state.img}&fn=${this.state.fullName}&id=${this.state.user}`}
+                      to={`/chat?name=${
+                        this.state.givenName
+                          ? this.state.givenName
+                          : this.state.familyName
+                      }&room=${this.state.room}&img=${this.state.img}&fn=${
+                        this.state.fullName
+                      }&id=${this.state.user}`}
                     >
                       <button className="ghost">
                         Create
                         <i className="fas fa-plus"></i>
                       </button>
                     </Link>
-                    
-                    
+
                     <button
                       className="ghost"
                       data-toggle="modal"
@@ -267,7 +294,7 @@ class Chat extends Component {
                       Join
                       <i className="fas fa-sign-in-alt"></i>
                     </button>
-                    
+
                     {/* Modal */}
                   </div>
                 </div>

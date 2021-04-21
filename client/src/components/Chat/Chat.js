@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import axios from 'axios';
-
 
 import SearchResult from './SearchResult/SearchResult';
 import Footer from './Footer/Footer';
 import MainChat from './ChatBox/MainChat/MainChat';
 
-import "./Chat.css";
+import './Chat.css';
 
 const API = 'AIzaSyCTYDkDvgIVWWLYcUCNUWFzbwY0hLnfB0c';
 const API_1 = 'AIzaSyD_2O5NzPNVJ1DcyKPiFzunWOUqB5oCmxk';
-
-
 
 class Chat extends Component {
   constructor(props) {
@@ -19,10 +16,10 @@ class Chat extends Component {
 
     // this.updateInputValue = this.updateInputValue.bind(this);
     this.state = {
-      idYoutube: "P8C7-cC0zKw",
-      inputValue: "",
+      idYoutube: 'P8C7-cC0zKw',
+      inputValue: '',
       isLoaded: false,
-      listResults: []
+      listResults: [],
     };
   }
 
@@ -33,38 +30,41 @@ class Chat extends Component {
 
   async getResults() {
     try {
-      const results = await axios.get('https://youtube.googleapis.com/youtube/v3/search',{
-        params: {
-          part: 'snippet',
-          maxResults: 10,
-          q: this.state.inputValue,
-          key: API || API_1
+      const results = await axios.get(
+        'https://youtube.googleapis.com/youtube/v3/search',
+        {
+          params: {
+            part: 'snippet',
+            maxResults: 10,
+            q: this.state.inputValue,
+            key: API || API_1,
+          },
         }
-      });
+      );
       this.setState({
         isLoaded: true,
-        listResults: results.data.items
+        listResults: results.data.items,
       });
-    } catch(err) {
+    } catch (err) {
       console.log('Failed to fetch data');
       this.setState({
-        isLoaded: false
+        isLoaded: false,
       });
     }
-}
+  }
 
   changeVideo = () => {
-    let video_id = this.state.inputValue.split("v=")[1];
-    
-    if(video_id) {
-      let ampersandPosition = video_id.indexOf("&");
+    let video_id = this.state.inputValue.split('v=')[1];
+
+    if (video_id) {
+      let ampersandPosition = video_id.indexOf('&');
 
       if (ampersandPosition !== -1) {
         video_id = video_id.substring(0, ampersandPosition);
       }
 
       this.setState({
-        idYoutube: video_id
+        idYoutube: video_id,
       });
     } else {
       this.getResults();
@@ -72,41 +72,42 @@ class Chat extends Component {
   };
 
   _handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.which === 13) {
+    if (e.key === 'Enter' || e.which === 13) {
       this.changeVideo();
       this.setState({
-        inputValue : '',
+        inputValue: '',
       });
     }
   };
 
   getId = (e) => {
-      e.preventDefault();
-      let getId = e.target.closest('.list-group-item').getAttribute('data-id');
-      this.setState({
-        idYoutube: getId,
-        listResults: []
-      });
-  }
+    e.preventDefault();
+    let getId = e.target.closest('.list-group-item').getAttribute('data-id');
+    this.setState({
+      idYoutube: getId,
+      listResults: [],
+    });
+  };
 
   onClick = () => {
     this.changeVideo();
     this.setState({
-      inputValue : '',
+      inputValue: '',
     });
-  }
+  };
 
   updateInputValue(e) {
     this.setState({
-      inputValue: e.target.value
+      inputValue: e.target.value,
     });
-  
   }
 
   render() {
-
     return (
-      <div className="container-fluid fix" onClick={() => this.setState({listResults: []})}>
+      <div
+        className="container-fluid fix"
+        onClick={() => this.setState({ listResults: [] })}
+      >
         <div className="row">
           <div className="col-md-8 p-0">
             <div className="search__container">
@@ -116,28 +117,32 @@ class Chat extends Component {
               <input
                 className="search__input"
                 type="text"
-                onKeyDown={(e) =>this._handleKeyDown(e)}
+                onKeyDown={(e) => this._handleKeyDown(e)}
                 value={this.state.inputValue}
                 onChange={(e) => this.updateInputValue(e)}
-                spellCheck = "false"
-                placeholder ="Tìm kiếm hoặc dán link youtube vào đây"
+                spellCheck="false"
+                placeholder="Tìm kiếm hoặc dán link youtube vào đây"
               />
               <i
                 className="fas fa-search fix-search"
                 onClick={this.onClick}
               ></i>
-              {this.state.isLoaded ? <SearchResult 
-              action = {this.getId} 
-              isLoaded={this.state.isLoaded}
-              listResults={this.state.listResults}
-              /> : null}
-              
+              {this.state.isLoaded ? (
+                <SearchResult
+                  action={this.getId}
+                  isLoaded={this.state.isLoaded}
+                  listResults={this.state.listResults}
+                />
+              ) : null}
             </div>
+          </div>
+          <div className="col-md-4 p-0">
+            <h3 className="search__container room">Mã phòng: ABCXYZ</h3>
           </div>
         </div>
         <div className="row setup">
           <div className="col-md-8 p-0 video">
-            <iframe 
+            <iframe
               className="fix-control"
               width="100%"
               height="100%"
